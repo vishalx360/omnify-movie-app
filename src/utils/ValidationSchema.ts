@@ -26,6 +26,10 @@ export const searchSchema = z.object({
   year: z.number().optional(),
 });
 
+export const searchSchemaLocal = z.object({
+  query: z.string().optional(),
+});
+
 export const SigninSchema = z.object({
   email: z.string().email(),
   password: passwordSchema,

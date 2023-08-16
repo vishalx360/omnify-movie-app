@@ -27,7 +27,7 @@ function MainNav() {
   return (
     <nav className="border-gray-200 bg-neutral-100 dark:bg-gray-900">
       <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
-        <Link href="/" className="flex items-center">
+        <Link href="/dashboard" className="flex items-center">
           <span className="self-center whitespace-nowrap text-2xl font-medium dark:text-white">
             Omnify Movie App
           </span>

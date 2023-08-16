@@ -1,4 +1,4 @@
-import { searchSchema } from "@/utils/ValidationSchema";
+import { searchSchema, searchSchemaLocal } from "@/utils/ValidationSchema";
 import { ErrorMessage, Field, Form, Formik, type FieldProps } from "formik";
 import { Search } from "lucide-react";
 import { useRouter } from "next/router";
@@ -8,13 +8,23 @@ import { Input } from "./ui/input";
 
 export function SearchInput() {
   const router = useRouter();
+
+  if (!router.isReady) {
+    return (
+      <div className="border-1 min-h-[60px] w-full max-w-[310px] animate-pulse rounded-xl border-gray-400 bg-gray-400/50 px-4 py-3 shadow" />
+    );
+  }
   return (
     <div>
       <Formik
-        initialValues={{ query: "" }}
-        validationSchema={toFormikValidationSchema(searchSchema)}
+        initialValues={{ query: router.query?.query ?? "" }}
+        validationSchema={toFormikValidationSchema(searchSchemaLocal)}
         onSubmit={async (values) => {
-          await router.push(`/search/${values.query}`);
+          if (values.query === "") {
+            await router.push(`/dashboard`);
+          } else {
+            await router.push(`/search/${values.query}`);
+          }
         }}
       >
         <Form>
@@ -26,7 +36,6 @@ export function SearchInput() {
                   type="text"
                   placeholder="Search for a movie"
                   id="query"
-                  required
                   {...field}
                 />
               )}

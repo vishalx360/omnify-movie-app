@@ -1,22 +1,20 @@
 import DashboardLayout from "@/components/DashboardLayout";
-import MovieRow from "@/components/MovieRow";
+import DiscoverGrid from "@/components/DiscoverGrid";
 import { type GetServerSidePropsContext } from "next";
 import { getSession } from "next-auth/react";
 
 function Dashboard() {
   return (
     <DashboardLayout>
-      <section className=" py-10 container">
-        <MovieRow type="NOWPLAYING" />
-        <MovieRow type="UPCOMING" />
-        <MovieRow type="POPULAR" />
-        <MovieRow type="TOPRATED" />
+      <section className=" container py-10">
+        <DiscoverGrid type="NOWPLAYING" />
+        <DiscoverGrid type="UPCOMING" />
+        <DiscoverGrid type="POPULAR" />
+        <DiscoverGrid type="TOPRATED" />
       </section>
     </DashboardLayout>
   );
 }
-
-
 
 export default Dashboard;
 
