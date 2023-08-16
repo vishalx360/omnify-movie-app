@@ -5,9 +5,13 @@ import {
   type DefaultSession,
   type NextAuthOptions,
 } from "next-auth";
+import Credentials from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
-import { env } from "~/env.mjs";
-import { prisma } from "~/server/db";
+import { env } from "@/env.mjs";
+import { prisma } from "@/server/db";
+import { verify } from "argon2";
+import { TRPCError } from "@trpc/server";
+import { SigninSchema } from "@/utils/ValidationSchema";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -47,6 +51,48 @@ export const authOptions: NextAuthOptions = {
   },
   adapter: PrismaAdapter(prisma),
   providers: [
+    Credentials({
+      name: "credentials",
+      credentials: {
+        email: {
+          label: "Email",
+          type: "email",
+          placeholder: "name@company.com",
+        },
+        password: { label: "Password", type: "password" },
+      },
+      authorize: async (credentials) => {
+        const creds = await SigninSchema.parseAsync(credentials);
+        const user = await prisma.user.findFirst({
+          where: { email: creds.email },
+        });
+        if (!user) {
+          throw new TRPCError({
+            code: "UNAUTHORIZED",
+            message: "Invalid credentials",
+          });
+        }
+        if (!user.password) {
+          throw new TRPCError({
+            code: "UNAUTHORIZED",
+            message: "Password not set, please use other login method (Github)",
+          });
+        }
+        const isValidPassword = await verify(
+          String(user.password),
+          creds.password
+        );
+        if (!isValidPassword) {
+          throw new Error("Invalid credentials");
+        }
+        return {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          image: user.image,
+        };
+      },
+    }),
     GithubProvider({
       clientId: env.GITHUB_CLIENT_ID,
       clientSecret: env.GITHUB_CLIENT_SECRET,
@@ -62,6 +108,10 @@ export const authOptions: NextAuthOptions = {
      * @see https://next-auth.js.org/providers/github
      */
   ],
+  pages: {
+    signIn: "/signin",
+    newUser: "/signup",
+  },
 };
 
 /**
