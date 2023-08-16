@@ -2,15 +2,15 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { type GetServerSidePropsContext } from "next";
 import { getSession } from "next-auth/react";
 
-function Dashboard() {
+function Favorite() {
   return (
     <DashboardLayout>
-      <section>list of movies from tmdb</section>
+      <section>list of movies in favorites</section>
     </DashboardLayout>
   );
 }
 
-export default Dashboard;
+export default Favorite;
 
 // make server call to redirect to /signin if not authenticated nextauth
 export async function getServerSideProps(context: GetServerSidePropsContext) {
