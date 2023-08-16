@@ -40,7 +40,7 @@ export default function SignInPage() {
   return (
     <>
       <Head>
-        <title>Taskflow | Sign-up</title>
+        <title>Omnify Movie App | Sign-up</title>
       </Head>
       <section className="bg-neutral-100 dark:bg-neutral-900">
         <div className="mx-auto flex h-screen flex-col items-center justify-center px-6 py-8 lg:py-0">
