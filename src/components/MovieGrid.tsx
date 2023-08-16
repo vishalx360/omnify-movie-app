@@ -8,17 +8,20 @@ function MovieGrid({
   title: string;
   movies: MovieDB.Objects.Movie[];
 }) {
-  // if (isLoading) {
-  //     return <MovieRowSkeleton amount={18} />
-  // }
   return (
     <div className="mb-8">
       <h1 className="mb-4 text-2xl font-medium capitalize">{title}</h1>
-      <div className="flex flex-wrap items-center gap-5">
-        {movies.slice(0, 18)?.map((movie, index) => (
-          <MoviePreview key={index} movie={movie} />
-        ))}
-      </div>
+      {movies?.length > 0 ? (
+        <div className="flex flex-wrap items-center gap-5">
+          {movies?.slice(0, 18)?.map((movie, index) => (
+            <MoviePreview key={index} movie={movie} />
+          ))}
+        </div>
+      ) : (
+        <div className="flex h-[300px] items-center justify-center rounded-xl bg-slate-100">
+          No movies found
+        </div>
+      )}
     </div>
   );
 }

@@ -5,7 +5,7 @@ import type MovieDB from "node-themoviedb";
 function MoviePreview({ movie }: { movie: MovieDB.Objects.Movie }) {
   return (
     <Link
-      href={`/movie/${movie.id}`}
+      href={`/movie/${movie.movie_id ?? movie.id}`}
       className="group flex h-64 w-32 transform cursor-pointer flex-col items-center justify-center p-2 transition-transform duration-300 hover:scale-105"
     >
       <Image

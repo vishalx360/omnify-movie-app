@@ -1,7 +1,6 @@
-import { Heart } from "lucide-react";
 import Image from "next/image";
 import type MovieDB from "node-themoviedb";
-import { Button } from "./ui/button";
+import AddToFavBtn from "./AddToFavBtn";
 
 function MovieDetail({ movie }: { movie: MovieDB.Objects.Movie }) {
   return (
@@ -27,7 +26,7 @@ function MovieDetail({ movie }: { movie: MovieDB.Objects.Movie }) {
           Synopsis: {movie.overview}
         </p>
         <div className="mt-10 flex items-center ">
-          <Button LeftIcon={Heart}>Add to favorite</Button>
+          <AddToFavBtn movie={movie} />
         </div>
       </div>
     </div>

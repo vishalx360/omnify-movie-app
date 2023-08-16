@@ -6,7 +6,6 @@ const passwordSchema = z
   .max(16, "Must contain less than 16 characters")
   .regex(/^\S*$/, { message: "Password must not contain whitespace" });
 
-
 // favorite
 export const MovieSchema = z.object({
   poster_path: z.string().nullable(),
@@ -32,7 +31,7 @@ export const AddToFavoriteSchema = MovieSchema.pick({
   release_date: true,
   overview: true,
   vote_average: true,
-})
+});
 
 // movie
 export const getListSchema = z.object({
@@ -74,5 +73,3 @@ export const SignUpSchema = z.object({
     .string()
     .regex(/^\S*$/, { message: "Password must not contain whitespace" }),
 });
-
-

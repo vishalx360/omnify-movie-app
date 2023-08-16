@@ -14,13 +14,29 @@ export const FavoriteRouter = createTRPCRouter({
       },
     });
   }),
+  doesExist: protectedProcedure
+    .input(
+      z.object({
+        movie_id: z.string(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const exist = await ctx.prisma.favroite.count({
+        where: {
+          userId: ctx.session.user.id,
+          movie_id: input.movie_id,
+        },
+      });
+      return exist !== 0;
+    }),
+
   add: protectedProcedure
     .input(AddToFavoriteSchema)
     .mutation(async ({ ctx, input }) => {
       const exist = await ctx.prisma.favroite.count({
         where: {
           userId: ctx.session.user.id,
-          movie_id: input.movie_id
+          movie_id: input.movie_id,
         },
       });
       if (exist) {
