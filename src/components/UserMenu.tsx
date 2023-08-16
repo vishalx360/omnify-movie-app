@@ -11,6 +11,7 @@ import {
 import getGravatar from "@/utils/getGravatar";
 import { useSession } from "next-auth/react";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 export function UserMenu() {
   const { data: session } = useSession();
@@ -54,10 +55,12 @@ export function UserMenu() {
           </DropdownMenuItem>
         </DropdownMenuGroup> */}
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="text-red-500">
-          Log out
-          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-        </DropdownMenuItem>
+        <Link href="/api/auth/signout">
+          <DropdownMenuItem className="text-red-500">
+            Log out
+            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+          </DropdownMenuItem>
+        </Link>
       </DropdownMenuContent>
     </DropdownMenu>
   );
