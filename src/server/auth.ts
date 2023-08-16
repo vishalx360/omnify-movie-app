@@ -12,6 +12,7 @@ import { prisma } from "@/server/db";
 import { verify } from "argon2";
 import { TRPCError } from "@trpc/server";
 import { SigninSchema } from "@/utils/ValidationSchema";
+import { signJTW, verifyJWT } from "@/utils/jwt";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -41,14 +42,36 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
+    session: ({ session, token }) => {
+      if (token) {
+        session.user = {
+          ...session.user,
+          ...token,
+        };
+      }
+      return session;
+    },
+
+    jwt: ({ token, user }) => {
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+      }
+      return token;
+    },
   },
+  jwt: {
+    async encode({ secret, token }) {
+      return await signJTW(token, secret);
+    },
+    async decode({ secret, token }) {
+      return await verifyJWT(token, secret);
+    },
+    maxAge: 30 * 24 * 60 * 60, // 30 days in seconds
+  },
+
+  session: { strategy: "jwt" },
+
   adapter: PrismaAdapter(prisma),
   providers: [
     Credentials({

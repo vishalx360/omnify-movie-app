@@ -8,12 +8,10 @@ function PasswordInput({ name = "password" }: { name?: string }) {
   const hide = useCallback(() => {
     setTimeout(() => {
       setHidden(true);
-      console.log("hide");
     }, 10000);
   }, []);
 
   const show = useCallback(() => {
-    console.log("show");
     setHidden(false);
   }, []);
 
