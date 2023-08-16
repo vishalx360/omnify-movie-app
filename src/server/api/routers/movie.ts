@@ -30,7 +30,7 @@ export const MovieRouter = createTRPCRouter({
   getList: protectedProcedure
     .input(getListSchema)
     .query(async ({ ctx, input }) => {
-      const apiFunction = API_MAPPING[input.list];
+      const apiFunction = API_MAPPING[input.type];
       try {
         const response = await apiFunction({
           query: {
