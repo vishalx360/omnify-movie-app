@@ -7,7 +7,7 @@ function SearchResultPage() {
   return (
     <DashboardLayout>
       <section className="container my-10">
-        <SearchResultGrid query={router.query?.query} />
+        <SearchResultGrid query={String(router.query?.query)} />
       </section>
     </DashboardLayout>
   );

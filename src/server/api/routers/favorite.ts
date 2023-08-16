@@ -1,4 +1,5 @@
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
+import { AddToFavoriteSchema } from "@/utils/ValidationSchema";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
@@ -14,12 +15,12 @@ export const FavoriteRouter = createTRPCRouter({
     });
   }),
   add: protectedProcedure
-    .input(z.object({ movie_id: z.string() }))
+    .input(AddToFavoriteSchema)
     .mutation(async ({ ctx, input }) => {
       const exist = await ctx.prisma.favroite.count({
         where: {
           userId: ctx.session.user.id,
-          movie_id: input.movie_id,
+          movie_id: input.movie_id
         },
       });
       if (exist) {
@@ -30,10 +31,7 @@ export const FavoriteRouter = createTRPCRouter({
       }
       // only create if it doesnt exist
       return ctx.prisma.favroite.create({
-        data: {
-          movie_id: input.movie_id,
-          userId: ctx.session.user.id,
-        },
+        data: { ...input, userId: ctx.session.user.id },
       });
     }),
   remove: protectedProcedure
