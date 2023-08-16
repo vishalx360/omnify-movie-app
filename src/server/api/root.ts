@@ -1,7 +1,7 @@
 import { exampleRouter } from "@/server/api/routers/example";
 import { createTRPCRouter } from "@/server/api/trpc";
 import { AuthenticationRouter } from "./routers/authentication";
-import { MovieRouter, } from "./routers/movie";
+import { MovieRouter } from "./routers/movie";
 import { FavoriteRouter } from "./routers/favorite";
 
 /**
@@ -13,7 +13,7 @@ export const appRouter = createTRPCRouter({
   example: exampleRouter,
   authentication: AuthenticationRouter,
   movie: MovieRouter,
-  favorite: FavoriteRouter
+  favorite: FavoriteRouter,
 });
 
 // export type definition of API

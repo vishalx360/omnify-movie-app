@@ -6,7 +6,6 @@ const passwordSchema = z
   .max(16, "Must contain less than 16 characters")
   .regex(/^\S*$/, { message: "Password must not contain whitespace" });
 
-
 export const getListSchema = z.object({
   list: z.enum(["POPULAR", "TOPRATED", "NOWPLAYING", "UPCOMING"]),
   page: z.number().default(1),

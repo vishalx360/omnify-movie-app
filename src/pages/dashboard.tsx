@@ -1,10 +1,9 @@
-import { GetServerSidePropsContext } from "next";
+import { type GetServerSidePropsContext } from "next";
 import { getSession, useSession } from "next-auth/react";
 import Link from "next/link";
 
 function Dashboard() {
   const { data: session } = useSession();
-
 
   return (
     <section>

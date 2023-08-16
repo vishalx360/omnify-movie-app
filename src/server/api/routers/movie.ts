@@ -1,11 +1,12 @@
 import { env } from "@/env.mjs";
+import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 import {
-  createTRPCRouter,
-  protectedProcedure
-} from "@/server/api/trpc";
-import { getDetailsSchema, getListSchema, getSimilarSchema, searchSchema } from "@/utils/ValidationSchema";
+  getDetailsSchema,
+  getListSchema,
+  getSimilarSchema,
+  searchSchema,
+} from "@/utils/ValidationSchema";
 import { TRPCError } from "@trpc/server";
-
 
 import MovieDB from "node-themoviedb";
 
@@ -15,7 +16,7 @@ const DEFAULT_QUERY = {
   query: {
     page: 1,
     region: "IN",
-  }
+  },
 };
 
 const API_MAPPING = {
@@ -24,7 +25,6 @@ const API_MAPPING = {
   NOWPLAYING: (query: typeof DEFAULT_QUERY) => mdb.movie.getNowPlaying(query),
   UPCOMING: (query: typeof DEFAULT_QUERY) => mdb.movie.getUpcoming(query),
 };
-
 
 export const MovieRouter = createTRPCRouter({
   getList: protectedProcedure
@@ -35,8 +35,8 @@ export const MovieRouter = createTRPCRouter({
         const response = await apiFunction({
           query: {
             ...DEFAULT_QUERY.query,
-            page: input.page
-          }
+            page: input.page,
+          },
         });
         return response.data.results;
       } catch (error) {
@@ -53,11 +53,10 @@ export const MovieRouter = createTRPCRouter({
       try {
         const response = await mdb.movie.getDetails({
           pathParameters: {
-            movie_id: input.movie_id
-          }
+            movie_id: input.movie_id,
+          },
         });
-        return response.data
-
+        return response.data;
       } catch (error) {
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
@@ -71,14 +70,13 @@ export const MovieRouter = createTRPCRouter({
       try {
         const response = await mdb.movie.getSimilarMovies({
           query: {
-            page: input.page
+            page: input.page,
           },
           pathParameters: {
-            movie_id: input.movie_id
-          }
+            movie_id: input.movie_id,
+          },
         });
         return response.data.results;
-
       } catch (error) {
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
@@ -95,12 +93,10 @@ export const MovieRouter = createTRPCRouter({
           query: {
             query: input.query,
             page: input.page,
-            year: input.year ?? undefined
-          }
+            year: input.year ?? undefined,
+          },
         });
-        console.log(response.data.results)
         return response.data.results;
-
       } catch (error) {
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",

@@ -30,7 +30,6 @@ export async function verifyJWT(token: string, secret: string): Promise<JWT> {
     // if its all good, return it, or perhaps just return a boolean
     return payload;
   } catch (err) {
-    console.log("Invalid token");
     return Promise.reject(err);
   }
 }
