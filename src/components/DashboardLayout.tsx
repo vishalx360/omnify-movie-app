@@ -1,9 +1,9 @@
-import Link from "next/link";
-import React from "react";
-import { UserMenu } from "./UserMenu";
-import { useRouter } from "next/router";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React from "react";
 import { SearchInput } from "./SearchInput";
+import { UserMenu } from "./UserMenu";
 
 function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (

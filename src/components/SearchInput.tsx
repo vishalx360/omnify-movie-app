@@ -1,4 +1,4 @@
-import { searchSchema, searchSchemaLocal } from "@/utils/ValidationSchema";
+import { searchSchemaLocal } from "@/utils/ValidationSchema";
 import { ErrorMessage, Field, Form, Formik, type FieldProps } from "formik";
 import { Search } from "lucide-react";
 import { useRouter } from "next/router";

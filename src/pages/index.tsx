@@ -1,10 +1,7 @@
-import { getSession, signIn, signOut, useSession } from "next-auth/react";
-import Head from "next/head";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { api } from "@/utils/api";
 import { type GetServerSidePropsContext } from "next";
 import { type Session } from "next-auth";
+import { getSession } from "next-auth/react";
+import Head from "next/head";
 
 export default function Home({ session }: { session: Session }) {
   return (

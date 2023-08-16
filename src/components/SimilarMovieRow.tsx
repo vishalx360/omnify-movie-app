@@ -1,5 +1,4 @@
 import { api } from "@/utils/api";
-import React from "react";
 import MoviePreview from "./MoviePreview";
 
 function SimilarMovies({ movie_id }: { movie_id: string }) {

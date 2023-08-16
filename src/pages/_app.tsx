@@ -1,9 +1,9 @@
+import { Toaster } from "@/components/ui/toaster";
+import "@/styles/globals.css";
+import { api } from "@/utils/api";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
-import { api } from "@/utils/api";
-import "@/styles/globals.css";
-import { Toaster } from "@/components/ui/toaster";
 import NextNprogress from "nextjs-progressbar";
 import { MdArrowUpward } from "react-icons/md";
 import ScrollToTop from "react-scroll-to-top";

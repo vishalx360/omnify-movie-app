@@ -1,8 +1,8 @@
 import { exampleRouter } from "@/server/api/routers/example";
 import { createTRPCRouter } from "@/server/api/trpc";
 import { AuthenticationRouter } from "./routers/authentication";
-import { MovieRouter } from "./routers/movie";
 import { FavoriteRouter } from "./routers/favorite";
+import { MovieRouter } from "./routers/movie";
 
 /**
  * This is the primary router for your server.
