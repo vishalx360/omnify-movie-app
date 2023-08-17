@@ -12,6 +12,8 @@ import { prisma } from "@/server/db";
 import { redisClient } from "@/utils/redisClient";
 import { initTRPC, TRPCError } from "@trpc/server";
 import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
+import { TRPCResponse } from "@trpc/server/rpc";
+import { NextApiResponse } from "next";
 import { type Session } from "next-auth";
 import superjson from "superjson";
 import { ZodError } from "zod";
@@ -26,6 +28,7 @@ import { ZodError } from "zod";
 
 interface CreateContextOptions {
   session: Session | null;
+  res: NextApiResponse<TRPCResponse>;
 }
 
 /**
@@ -40,6 +43,7 @@ interface CreateContextOptions {
  */
 const createInnerTRPCContext = (opts: CreateContextOptions) => {
   return {
+    res: opts.res,
     session: opts.session,
     prisma,
     redis: redisClient,
@@ -59,6 +63,7 @@ export const createTRPCContext = async (opts: CreateNextContextOptions) => {
   const session = await getServerAuthSession({ req, res });
 
   return createInnerTRPCContext({
+    res,
     session,
   });
 };
