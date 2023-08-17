@@ -52,7 +52,7 @@ function MainNav() {
                       "flex items-center hover:underline py-2 pl-3 pr-4  underline-offset-2 ",
                       currentPath === item.path && "underline"
                     )}
-                    target="_blank"
+                    target={item.isExternal ? "_blank" : undefined}
                     aria-current="page"
                   >
                     {item.name}
