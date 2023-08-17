@@ -17,9 +17,9 @@ Want to setup locally ? follow [Setup Instructions](/Setup-Instruction.md)
 
 ## Final Ui Screenshots
 
-|      Dashboard       | Movie Detail Page  |    Favorite Page    |
-| :------------------: | :----------------: | :-----------------: |
-| ![](./dashboard.png) | ![](./details.png) | ![](./favorite.png) |
+|           Dashboard           |     Movie Detail Page     |        Favorite Page        |
+| :---------------------------: | :-----------------------: | :-------------------------: |
+| ![dashboard](./dashboard.png) | ![details](./details.png) | ![favorite](./favorite.png) |
 
 ## Tech Stack
 
@@ -46,3 +46,7 @@ Want to setup locally ? follow [Setup Instructions](/Setup-Instruction.md)
 ## System Arch
 
 ![system-arch](./system-arch.png)
+
+## CI/CD Pipeline
+
+![ci/cd](./ci-cd.png)
