@@ -8,7 +8,14 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    
+    env:
+      DATABASE_URL: 'https://test_value.com'
+      DATABASE_URL_NON_POOLING: 'https://test_value.com'
+      NEXTAUTH_SECRET: 'https://test_value.com'
+      GITHUB_CLIENT_ID: 'https://test_value.com'
+      GITHUB_CLIENT_SECRET: 'https://test_value.com'
+      TMDB_API_KEY: 'https://test_value.com'
+      REDIS_URL: 'https://test_value.com'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
