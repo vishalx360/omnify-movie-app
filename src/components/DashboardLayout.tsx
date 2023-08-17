@@ -9,6 +9,9 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <main>
       <MainNav />
+      <div className="w-full p-2 bg-neutral-100 lg:hidden ">
+        <SearchInput />
+      </div>
       {children}
     </main>
   );
@@ -32,7 +35,9 @@ function MainNav() {
             Omnify Movie App
           </span>
         </Link>
-        <SearchInput />
+        <div className="hidden lg:block">
+          <SearchInput />
+        </div>
 
         <div className="flex items-center justify-center gap-10">
           <div className="hidden w-full md:block md:w-auto" id="navbar-default">

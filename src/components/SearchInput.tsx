@@ -28,7 +28,7 @@ export function SearchInput() {
         }}
       >
         <Form>
-          <div className="flex w-full max-w-[310px] items-center gap-2">
+          <div className="flex w-full  items-center gap-2">
             <Field name="query">
               {({ field }: FieldProps) => (
                 <Input
