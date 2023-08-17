@@ -10,7 +10,7 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <main>
       <MainNav />
-      <div className="w-full p-2 bg-neutral-100 lg:hidden ">
+      <div className="w-full bg-neutral-100 p-2 lg:hidden ">
         <SearchInput />
       </div>
       {children}
@@ -23,7 +23,11 @@ export default DashboardLayout;
 const pages = [
   { name: "Dashboard", path: "/dashboard" },
   { name: "Favorites", path: "/favorites" },
-  { name: "Github", isExternal: true, path: "https://github.com/vishalx360/omnify-movie-app" },
+  {
+    name: "Github",
+    isExternal: true,
+    path: "https://github.com/vishalx360/omnify-movie-app",
+  },
 ];
 function MainNav() {
   const router = useRouter();
@@ -49,14 +53,16 @@ function MainNav() {
                   <Link
                     href={item.path}
                     className={cn(
-                      "flex items-center hover:underline py-2 pl-3 pr-4  underline-offset-2 ",
+                      "flex items-center py-2 pl-3 pr-4 underline-offset-2  hover:underline ",
                       currentPath === item.path && "underline"
                     )}
                     target={item.isExternal ? "_blank" : undefined}
                     aria-current="page"
                   >
                     {item.name}
-                    {item.isExternal && <ExternalLinkIcon className="inline h-4 w-4 ml-1" />}
+                    {item.isExternal && (
+                      <ExternalLinkIcon className="ml-1 inline h-4 w-4" />
+                    )}
                   </Link>
                 </li>
               ))}
