@@ -2,6 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -43,17 +44,21 @@ export function UserMenu() {
             </p>
           </div>
         </DropdownMenuLabel>
-        {/* <DropdownMenuSeparator />
+        <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            Dashboard
-            <DropdownMenuShortcut>⇧⌘D</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            Favorites
-            <DropdownMenuShortcut>⌘F</DropdownMenuShortcut>
-          </DropdownMenuItem>
-        </DropdownMenuGroup> */}
+          <Link href="/dashboard">
+            <DropdownMenuItem >
+              Dashboard
+              <DropdownMenuShortcut>⇧⌘D</DropdownMenuShortcut>
+            </DropdownMenuItem>
+          </Link>
+          <Link href="/favorites">
+            <DropdownMenuItem>
+              Favorites
+              <DropdownMenuShortcut>⌘F</DropdownMenuShortcut>
+            </DropdownMenuItem>
+          </Link>
+        </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <Link href="/api/auth/signout">
           <DropdownMenuItem className="text-red-500">
