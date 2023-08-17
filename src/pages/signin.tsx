@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { LucideArrowLeft } from "lucide-react";
+import { ExternalLinkIcon, LucideArrowLeft } from "lucide-react";
 import { type GetServerSidePropsContext } from "next";
 import { getSession, signIn } from "next-auth/react";
 import Head from "next/head";
@@ -28,7 +28,21 @@ export default function SignInPage() {
             >
               <LucideArrowLeft className="text-2xl" />
             </Link>
-            <div className="my-10 block text-3xl ">Omnify Movie App</div>
+            <div className="my-10  flex flex-col items-center ">
+              <p className="text-3xl">
+                Omnify Movie App
+              </p>
+              <Link
+                href={"https://github.com/vishalx360/omnify-movie-app"}
+                className={
+                  "flex text-md items-center hover:underline py-2 pl-3 pr-4  underline-offset-2 "}
+                target="_blank"
+                aria-current="page"
+              >
+                Github Repo
+                <ExternalLinkIcon className="inline h-4 w-4 ml-1" />
+              </Link>
+            </div>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -69,6 +83,7 @@ export default function SignInPage() {
                   Sign up
                 </Link>
               </p>
+
             </div>
           </motion.div>
         </div>

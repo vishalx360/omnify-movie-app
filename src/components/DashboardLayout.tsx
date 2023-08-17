@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { SearchInput } from "./SearchInput";
 import { UserMenu } from "./UserMenu";
+import { ExternalLinkIcon } from "lucide-react";
 
 function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -22,6 +23,7 @@ export default DashboardLayout;
 const pages = [
   { name: "Dashboard", path: "/dashboard" },
   { name: "Favorites", path: "/favorites" },
+  { name: "Github", isExternal: true, path: "https://github.com/vishalx360/omnify-movie-app" },
 ];
 function MainNav() {
   const router = useRouter();
@@ -47,12 +49,14 @@ function MainNav() {
                   <Link
                     href={item.path}
                     className={cn(
-                      "block py-2 pl-3 pr-4  underline-offset-2 ",
+                      "flex items-center hover:underline py-2 pl-3 pr-4  underline-offset-2 ",
                       currentPath === item.path && "underline"
                     )}
+                    target="_blank"
                     aria-current="page"
                   >
                     {item.name}
+                    {item.isExternal && <ExternalLinkIcon className="inline h-4 w-4 ml-1" />}
                   </Link>
                 </li>
               ))}
