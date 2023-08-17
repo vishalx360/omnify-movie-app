@@ -96,12 +96,12 @@ export function CredentialSection() {
                 </label>
               </div>
             </div>
-            <Link
+            {/* <Link
               href="/resetPassword"
               className="text-sm font-medium text-black hover:underline dark:text-black"
             >
               Forgot password?
-            </Link>
+            </Link> */}
           </div>
           <Button
             type="submit"
