@@ -24,7 +24,7 @@ function MovieDetailsPage() {
   }
   return (
     <DashboardLayout>
-      {!movie ? (
+      {movie ? (
         <section className="container my-10">
           <MovieDetail movie={movie} />
           <div className="mt-10">
