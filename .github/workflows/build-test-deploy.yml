@@ -26,17 +26,15 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '18'
-      - name: Install pnpm
-        run: npm install -g pnpm
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
 
       - name: Build Next.js app
-        run: pnpm run build
+        run: npm run build
 
       - name: Run tests
-        run: pnpm run test:ci
+        run: npm run test:ci
 
       - name: Call Vercel Deploy Hook
         env:
