@@ -1,4 +1,3 @@
-import { exampleRouter } from "@/server/api/routers/example";
 import { createTRPCRouter } from "@/server/api/trpc";
 import { AuthenticationRouter } from "./routers/authentication";
 import { FavoriteRouter } from "./routers/favorite";
@@ -10,7 +9,6 @@ import { MovieRouter } from "./routers/movie";
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
-  example: exampleRouter,
   authentication: AuthenticationRouter,
   movie: MovieRouter,
   favorite: FavoriteRouter,

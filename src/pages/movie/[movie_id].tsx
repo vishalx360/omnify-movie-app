@@ -9,7 +9,7 @@ function MovieDetailsPage() {
   const router = useRouter();
   const { data: movie, error } = api.movie.getDetails.useQuery(
     {
-      movie_id: router.query?.movie_id,
+      movie_id: router.query?.movie_id as string,
     },
     {
       enabled: Boolean(router.query.movie_id),
@@ -17,7 +17,9 @@ function MovieDetailsPage() {
   );
 
   if (error) {
-    return <Error statusCode={error.data?.httpStatus} title={error.message} />;
+    return (
+      <Error statusCode={error.data?.httpStatus ?? 500} title={error.message} />
+    );
   }
   return (
     <DashboardLayout>

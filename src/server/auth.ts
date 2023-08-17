@@ -1,7 +1,6 @@
 import { env } from "@/env.mjs";
 import { prisma } from "@/server/db";
 import { SigninSchema } from "@/utils/ValidationSchema";
-import { signJTW, verifyJWT } from "@/utils/jwt";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { TRPCError } from "@trpc/server";
 import { verify } from "argon2";
@@ -40,6 +39,7 @@ declare module "next-auth" {
  *
  * @see https://next-auth.js.org/configuration/options
  */
+
 export const authOptions: NextAuthOptions = {
   callbacks: {
     session: ({ session, token }) => {
@@ -59,15 +59,6 @@ export const authOptions: NextAuthOptions = {
       }
       return token;
     },
-  },
-  jwt: {
-    async encode({ secret, token }) {
-      return await signJTW(token, secret);
-    },
-    async decode({ secret, token }) {
-      return await verifyJWT(token, secret);
-    },
-    maxAge: 30 * 24 * 60 * 60, // 30 days in seconds
   },
 
   session: { strategy: "jwt" },

@@ -6,7 +6,7 @@ function MovieGrid({
   title,
 }: {
   title: string;
-  movies: MovieDB.Objects.Movie[];
+  movies: MovieDB.Objects.Movie[] | MovieDB.Responses.Movie.GetDetails[];
 }) {
   return (
     <div className="mb-8">

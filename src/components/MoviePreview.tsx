@@ -2,10 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import type MovieDB from "node-themoviedb";
 
-function MoviePreview({ movie }: { movie: MovieDB.Objects.Movie }) {
+function MoviePreview({
+  movie,
+}: {
+  movie: MovieDB.Objects.Movie | MovieDB.Responses.Movie.GetDetails;
+}) {
   return (
     <Link
-      href={`/movie/${movie.movie_id ?? movie.id}`}
+      href={`/movie/${movie.id}`}
       className="group flex h-64 w-32 transform cursor-pointer flex-col items-center justify-center p-2 transition-transform duration-300 hover:scale-105"
     >
       <Image

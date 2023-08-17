@@ -1,7 +1,6 @@
 import { Field, Form, Formik, type FieldProps } from "formik";
 import { LucideArrowRight } from "lucide-react";
 import { signIn } from "next-auth/react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 import { toFormikValidationSchema } from "zod-formik-adapter";

@@ -10,7 +10,10 @@ function Favorite() {
   return (
     <DashboardLayout>
       {error && (
-        <Error statusCode={error.data?.httpStatus} title={error.message} />
+        <Error
+          statusCode={error.data?.httpStatus ?? 500}
+          title={error.message}
+        />
       )}
       <section className="container my-10">
         {isLoading ? (

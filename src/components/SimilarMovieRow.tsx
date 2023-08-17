@@ -11,7 +11,7 @@ function SimilarMovies({ movie_id }: { movie_id: string }) {
     <div className="mb-8">
       <h1 className="mb-4 text-2xl font-medium capitalize">Similar Movies</h1>
       <div className="flex flex-wrap items-center gap-5">
-        {data.slice(0, 18)?.map((movie, index) => (
+        {data?.slice(0, 18)?.map((movie, index) => (
           <MoviePreview key={index} movie={movie} />
         ))}
       </div>

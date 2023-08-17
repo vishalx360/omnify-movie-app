@@ -7,30 +7,8 @@ const passwordSchema = z
   .regex(/^\S*$/, { message: "Password must not contain whitespace" });
 
 // favorite
-export const MovieSchema = z.object({
-  poster_path: z.string().nullable(),
-  adult: z.boolean(),
-  overview: z.string(),
-  release_date: z.string(),
-  genre_ids: z.array(z.number()),
-  movie_id: z.string(),
-  original_title: z.string(),
-  original_language: z.string(),
-  title: z.string(),
-  backdrop_path: z.string().nullable(),
-  popularity: z.number(),
-  vote_count: z.number(),
-  video: z.boolean(),
-  vote_average: z.string(),
-});
-
-export const AddToFavoriteSchema = MovieSchema.pick({
-  movie_id: true,
-  poster_path: true,
-  title: true,
-  release_date: true,
-  overview: true,
-  vote_average: true,
+export const AddToFavoriteSchema = z.object({
+  movie_id: z.number(),
 });
 
 // movie

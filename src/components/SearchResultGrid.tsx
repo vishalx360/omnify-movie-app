@@ -21,7 +21,9 @@ export default function SearchResultGrid({ query }: { query: string }) {
   }
 
   if (error) {
-    return <Error statusCode={error.data?.httpStatus} title={error.message} />;
+    return (
+      <Error statusCode={error.data?.httpStatus ?? 500} title={error.message} />
+    );
   }
 
   if (movies) {

@@ -23,7 +23,7 @@ export function SearchInput() {
           if (values.query === "") {
             await router.push(`/dashboard`);
           } else {
-            await router.push(`/search/${values.query}`);
+            await router.push(`/search/${values.query as string}`);
           }
         }}
       >

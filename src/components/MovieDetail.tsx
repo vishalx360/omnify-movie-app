@@ -2,7 +2,11 @@ import Image from "next/image";
 import type MovieDB from "node-themoviedb";
 import AddToFavBtn from "./AddToFavBtn";
 
-function MovieDetail({ movie }: { movie: MovieDB.Objects.Movie }) {
+function MovieDetail({
+  movie,
+}: {
+  movie: MovieDB.Objects.Movie | MovieDB.Responses.Movie.GetDetails;
+}) {
   return (
     <div className="flex flex-col items-center justify-center md:flex-row md:justify-start">
       <Image
