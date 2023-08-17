@@ -2,6 +2,7 @@ import DashboardLayout from "@/components/DashboardLayout";
 import MovieDetail from "@/components/MovieDetail";
 import SimilarMovies from "@/components/SimilarMovieRow";
 import { api } from "@/utils/api";
+import { LucideLoader } from "lucide-react";
 import Error from "next/error";
 import { useRouter } from "next/router";
 
@@ -23,7 +24,7 @@ function MovieDetailsPage() {
   }
   return (
     <DashboardLayout>
-      {movie ? (
+      {!movie ? (
         <section className="container my-10">
           <MovieDetail movie={movie} />
           <div className="mt-10">
@@ -31,7 +32,11 @@ function MovieDetailsPage() {
           </div>
         </section>
       ) : (
-        <h1>loading</h1>
+        <div className="flex justify-center items-center h-screen">
+          <div className="animate-spin ">
+            <LucideLoader />
+          </div>
+        </div>
       )}
     </DashboardLayout>
   );
