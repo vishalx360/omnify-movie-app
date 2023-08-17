@@ -47,7 +47,7 @@ export function UserMenu() {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <Link href="/dashboard">
-            <DropdownMenuItem >
+            <DropdownMenuItem>
               Dashboard
               <DropdownMenuShortcut>⇧⌘D</DropdownMenuShortcut>
             </DropdownMenuItem>
@@ -59,6 +59,15 @@ export function UserMenu() {
             </DropdownMenuItem>
           </Link>
         </DropdownMenuGroup>
+        <Link
+          href="https://github.com/vishalx360/omnify-movie-app"
+          target="_blank"
+        >
+          <DropdownMenuItem>
+            Github
+            <DropdownMenuShortcut>⌘G</DropdownMenuShortcut>
+          </DropdownMenuItem>
+        </Link>
         <DropdownMenuSeparator />
         <Link href="/api/auth/signout">
           <DropdownMenuItem className="text-red-500">

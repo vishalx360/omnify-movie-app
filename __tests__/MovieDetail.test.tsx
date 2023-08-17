@@ -1,17 +1,20 @@
-import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
-import MovieDetail from '../src/components/MovieDetail';
-import MovieDB from 'node-themoviedb';
+import "@testing-library/jest-dom";
+import { render } from "@testing-library/react";
+import MovieDetail from "../src/components/MovieDetail";
+import MovieDB from "node-themoviedb";
 
-
-describe('MovieDetail Component', () => {
-  it('renders movie details correctly', () => {
-    const { getByAltText, getByText } = render(<MovieDetail movie={TEST_MOVIE_DATA} />);
+describe("MovieDetail Component", () => {
+  it("renders movie details correctly", () => {
+    const { getByAltText, getByText } = render(
+      <MovieDetail movie={TEST_MOVIE_DATA} />
+    );
 
     const titleElement = getByText(TEST_MOVIE_DATA.title);
     expect(titleElement).toBeInTheDocument();
 
-    const releaseDateElement = getByText(`Released : ${TEST_MOVIE_DATA.release_date}`);
+    const releaseDateElement = getByText(
+      `Released : ${TEST_MOVIE_DATA.release_date}`
+    );
     expect(releaseDateElement).toBeInTheDocument();
 
     const ratingElement = getByText(`Rating : ${TEST_MOVIE_DATA.vote_average}`);
@@ -20,14 +23,10 @@ describe('MovieDetail Component', () => {
     const overviewElement = getByText(`Synopsis: ${TEST_MOVIE_DATA.overview}`);
     expect(overviewElement).toBeInTheDocument();
 
-
     const imageElement = getByAltText(`${TEST_MOVIE_DATA.title} Poster`);
     expect(imageElement).toBeInTheDocument();
   });
-
 });
-
-
 
 export const TEST_MOVIE_DATA = {
   adult: false,
@@ -98,4 +97,4 @@ export const TEST_MOVIE_DATA = {
   video: false,
   vote_average: 8.3,
   vote_count: 1966,
-} satisfies MovieDB.Responses.Movie.GetDetails
+} satisfies MovieDB.Responses.Movie.GetDetails;

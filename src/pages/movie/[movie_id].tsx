@@ -27,7 +27,7 @@ function MovieDetailsPage() {
     <DashboardLayout>
       {movie ? (
         <section className="container my-10">
-          <MovieDetail movie={movie} >
+          <MovieDetail movie={movie}>
             <div className="mt-10 flex items-center ">
               <AddToFavBtn movie={movie} />
             </div>
@@ -37,7 +37,7 @@ function MovieDetailsPage() {
           </div>
         </section>
       ) : (
-        <div className="flex justify-center items-center h-screen">
+        <div className="flex h-screen items-center justify-center">
           <div className="animate-spin ">
             <LucideLoader />
           </div>

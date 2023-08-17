@@ -29,18 +29,17 @@ export default function SignInPage() {
               <LucideArrowLeft className="text-2xl" />
             </Link>
             <div className="my-10  flex flex-col items-center ">
-              <p className="text-3xl">
-                Omnify Movie App
-              </p>
+              <p className="text-3xl">Omnify Movie App</p>
               <Link
                 href={"https://github.com/vishalx360/omnify-movie-app"}
                 className={
-                  "flex text-md items-center hover:underline py-2 pl-3 pr-4  underline-offset-2 "}
+                  "text-md flex items-center py-2 pl-3 pr-4 underline-offset-2  hover:underline "
+                }
                 target="_blank"
                 aria-current="page"
               >
                 Github Repo
-                <ExternalLinkIcon className="inline h-4 w-4 ml-1" />
+                <ExternalLinkIcon className="ml-1 inline h-4 w-4" />
               </Link>
             </div>
           </motion.div>
@@ -83,7 +82,6 @@ export default function SignInPage() {
                   Sign up
                 </Link>
               </p>
-
             </div>
           </motion.div>
         </div>
