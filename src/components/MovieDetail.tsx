@@ -4,8 +4,10 @@ import AddToFavBtn from "./AddToFavBtn";
 
 function MovieDetail({
   movie,
+  children,
 }: {
   movie: MovieDB.Objects.Movie | MovieDB.Responses.Movie.GetDetails;
+  children?: React.ReactNode;
 }) {
   return (
     <div className="flex flex-col items-center justify-center md:flex-row md:justify-start">
@@ -29,9 +31,7 @@ function MovieDetail({
         <p className="mb-4 mt-10 leading-8 text-gray-700">
           Synopsis: {movie.overview}
         </p>
-        <div className="mt-10 flex items-center ">
-          <AddToFavBtn movie={movie} />
-        </div>
+        {children}
       </div>
     </div>
   );

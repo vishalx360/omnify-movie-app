@@ -1,3 +1,4 @@
+import AddToFavBtn from "@/components/AddToFavBtn";
 import DashboardLayout from "@/components/DashboardLayout";
 import MovieDetail from "@/components/MovieDetail";
 import SimilarMovies from "@/components/SimilarMovieRow";
@@ -26,7 +27,11 @@ function MovieDetailsPage() {
     <DashboardLayout>
       {movie ? (
         <section className="container my-10">
-          <MovieDetail movie={movie} />
+          <MovieDetail movie={movie} >
+            <div className="mt-10 flex items-center ">
+              <AddToFavBtn movie={movie} />
+            </div>
+          </MovieDetail>
           <div className="mt-10">
             <SimilarMovies movie_id={String(movie.id)} />
           </div>

@@ -4,11 +4,12 @@ const config = {
   parserOptions: {
     project: true,
   },
-  plugins: ["simple-import-sort", "import", "@typescript-eslint"],
+  plugins: ["testing-library", "simple-import-sort", "import", "@typescript-eslint"],
   extends: [
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended-type-checked",
     "plugin:@typescript-eslint/stylistic-type-checked",
+    "plugin:testing-library/react"
   ],
   rules: {
     // These opinionated rules are enabled in stylistic-type-checked above.
