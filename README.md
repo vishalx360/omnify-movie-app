@@ -13,13 +13,13 @@ Want to setup locally ? follow [Setup Instructions](/Setup-Instruction.md)
 
 ## UI Wireframe
 
-![wireframe](./wireframe.png)
+![wireframe](./public/diagrams/wireframe.png)
 
 ## Final Ui Screenshots
 
 |           Dashboard           |     Movie Detail Page     |        Favorite Page        |
 | :---------------------------: | :-----------------------: | :-------------------------: |
-| ![dashboard](./dashboard.png) | ![details](./details.png) | ![favorite](./favorite.png) |
+| ![dashboard](./public/diagrams/dashboard.png) | ![details](./public/diagrams/details.png) | ![favorite](./public/diagrams/favorite.png) |
 
 ## Tech Stack
 
@@ -41,12 +41,12 @@ Want to setup locally ? follow [Setup Instructions](/Setup-Instruction.md)
 
 ## Database Schema
 
-![db-schema](./db-schema.png)
+![db-schema](./public/diagrams/db-schema.png)
 
 ## System Arch
 
-![system-arch](./system-arch.png)
+![system-arch](./public/diagrams/system-arch.png)
 
 ## CI/CD Pipeline
 
-![ci/cd](./ci-cd.png)
+![ci/cd](./public/diagrams/ci-cd.png)
