@@ -1,6 +1,5 @@
 import Image from "next/image";
 import type MovieDB from "node-themoviedb";
-import AddToFavBtn from "./AddToFavBtn";
 
 function MovieDetail({
   movie,

@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
 import MovieDetail from '../src/components/MovieDetail';
+import MovieDB from 'node-themoviedb';
 
 
 describe('MovieDetail Component', () => {
@@ -24,7 +25,6 @@ describe('MovieDetail Component', () => {
     expect(imageElement).toBeInTheDocument();
   });
 
-  // You can add more tests for various scenarios here
 });
 
 
@@ -84,23 +84,10 @@ export const TEST_MOVIE_DATA = {
     },
   ],
   release_date: "2023-07-19",
-  revenue: 649000000,
+  revenue: "649000000",
   runtime: 181,
-  spoken_languages: [
-    {
-      english_name: "Dutch",
-      iso_639_1: "nl",
-      name: "Nederlands",
-    },
-    {
-      english_name: "English",
-      iso_639_1: "en",
-      name: "English",
-    },
-  ],
   spoken_language: [
     {
-      english_name: "Dutch",
       iso_639_1: "nl",
       name: "Nederlands",
     },
@@ -111,4 +98,4 @@ export const TEST_MOVIE_DATA = {
   video: false,
   vote_average: 8.3,
   vote_count: 1966,
-};
+} satisfies MovieDB.Responses.Movie.GetDetails
