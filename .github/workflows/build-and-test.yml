@@ -16,6 +16,9 @@ jobs:
       GITHUB_CLIENT_SECRET: 'https://test_value.com'
       TMDB_API_KEY: 'https://test_value.com'
       REDIS_URL: 'https://test_value.com'
+      NEXTAUTH_URL: 'https://test_value.com'
+      NODE_ENV: 'production'
+     
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
