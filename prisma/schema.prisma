@@ -12,12 +12,6 @@ datasource db {
     shadowDatabaseUrl = env("DATABASE_URL_NON_POOLING") // used for migrations
 }
 
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-}
-
 model Favroite {
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
