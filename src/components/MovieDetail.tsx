@@ -11,6 +11,7 @@ function MovieDetail({
   return (
     <div className="flex flex-col items-center justify-center md:flex-row md:justify-start">
       <Image
+        unoptimized
         placeholder="blur"
         blurDataURL="/placeholder.png"
         height={300}

@@ -13,6 +13,7 @@ function MoviePreview({
       className="group flex h-64 w-32 transform cursor-pointer flex-col items-center justify-center p-2 transition-transform duration-300 hover:scale-105"
     >
       <Image
+        unoptimized
         height={640}
         width={320}
         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
