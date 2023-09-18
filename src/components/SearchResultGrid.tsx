@@ -3,7 +3,6 @@ import MovieGrid from "./MovieGrid";
 
 export default function SearchResultGrid({
   movies,
-  query,
 }: {
   movies: MovieDB.Responses.Movie.GetDetails[];
   query: string;

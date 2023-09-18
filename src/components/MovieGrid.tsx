@@ -13,7 +13,7 @@ function MovieGrid({
       <h1 className="mb-4 text-2xl font-medium capitalize">{title}</h1>
       {movies?.length > 0 ? (
         <div className="flex flex-wrap items-center gap-5">
-          {movies?.slice(0, 18)?.map((movie, index) => (
+          {movies?.slice(0, 18)?.map((movie) => (
             <MoviePreview key={movie.id} movie={movie} />
           ))}
         </div>
