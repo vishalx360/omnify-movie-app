@@ -3,14 +3,23 @@ import BackButton from "@/components/BackButton";
 import DashboardLayout from "@/components/DashboardLayout";
 import MovieDetail from "@/components/MovieDetail";
 import SimilarMovies from "@/components/SimilarMovieRow";
-import { getList, getMovieDetails, getSimilar, movieSectionTypes } from "@/utils/GetMovieData";
-import { GetStaticPropsContext } from "next";
+import {
+  getList,
+  getMovieDetails,
+  getSimilar,
+  movieSectionTypes,
+} from "@/utils/GetMovieData";
+import { type GetStaticPropsContext } from "next";
 import Error from "next/error";
-import MovieDB from "node-themoviedb";
+import type MovieDB from "node-themoviedb";
 
-function MovieDetailsPage({ movie, similarMovies }:
-  { movie: MovieDB.Responses.Movie.GetDetails | null, similarMovies: MovieDB.Responses.Movie.GetDetails[] | null }) {
-
+function MovieDetailsPage({
+  movie,
+  similarMovies,
+}: {
+  movie: MovieDB.Responses.Movie.GetDetails | null;
+  similarMovies: MovieDB.Responses.Movie.GetDetails[] | null;
+}) {
   if (!movie) {
     return (
       <Error statusCode={500} title={"Some error occured getting details.."} />
@@ -30,12 +39,13 @@ function MovieDetailsPage({ movie, similarMovies }:
                 <AddToFavBtn movie={movie} />
               </div>
             </MovieDetail>
-            {similarMovies && <div className="mt-10">
-              <SimilarMovies movies={similarMovies} />
-            </div>}
+            {similarMovies && (
+              <div className="mt-10">
+                <SimilarMovies movies={similarMovies} />
+              </div>
+            )}
           </>
         )}
-
       </section>
     </DashboardLayout>
   );
@@ -43,25 +53,24 @@ function MovieDetailsPage({ movie, similarMovies }:
 
 export default MovieDetailsPage;
 
-
-
 export async function getStaticProps(context: GetStaticPropsContext) {
   try {
     const movie = await getMovieDetails(context.params?.movie_id as string);
-    const similarMovies = await getSimilar({ movie_id: context.params?.movie_id as string, page: 1 });
+    const similarMovies = await getSimilar({
+      movie_id: context.params?.movie_id as string,
+      page: 1,
+    });
     return {
       props: { movie, similarMovies },
       revalidate: 60 * 60 * 24 * 30, // 30 days
-    }
-  }
-  catch (e) {
+    };
+  } catch (e) {
     return {
       props: { movie: null, similarMovies: null },
       revalidate: 60 * 60 * 6, // 6 hours
-    }
+    };
   }
 }
-
 
 export async function getStaticPaths() {
   const promises = movieSectionTypes.map((type) => getList({ type, page: 1 }));
@@ -81,5 +90,5 @@ export async function getStaticPaths() {
   const paths = [...movieIdSet].map((id) => ({
     params: { movie_id: String(id) },
   }));
-  return { paths, fallback: 'blocking' }
+  return { paths, fallback: "blocking" };
 }

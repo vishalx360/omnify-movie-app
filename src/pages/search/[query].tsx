@@ -1,10 +1,14 @@
 import DashboardLayout from "@/components/DashboardLayout";
 import MovieGrid from "@/components/MovieGrid";
 import { getSearchResults } from "@/utils/GetMovieData";
-import { GetStaticPropsContext } from "next";
-import MovieDB from "node-themoviedb";
+import { type GetStaticPropsContext } from "next";
+import type MovieDB from "node-themoviedb";
 
-function SearchResultPage({ results }: { results: MovieDB.Responses.Movie.GetDetails[] }) {
+function SearchResultPage({
+  results,
+}: {
+  results: MovieDB.Responses.Movie.GetDetails[];
+}) {
   return (
     <DashboardLayout>
       <section className="container my-10">
@@ -19,24 +23,24 @@ function SearchResultPage({ results }: { results: MovieDB.Responses.Movie.GetDet
 
 export default SearchResultPage;
 
-
 export async function getStaticProps(context: GetStaticPropsContext) {
   try {
-    const results = await getSearchResults({ query: context.params?.query as string, page: 1 });
+    const results = await getSearchResults({
+      query: context.params?.query as string,
+      page: 1,
+    });
     return {
       props: { results },
       revalidate: 60 * 60 * 6, // 6 hours
-    }
-  }
-  catch (e) {
+    };
+  } catch (e) {
     return {
-      props: { results: [], },
+      props: { results: [] },
       revalidate: 60 * 60 * 6, // 6 hours
-    }
+    };
   }
 }
 
-
 export function getStaticPaths() {
-  return { paths: [], fallback: 'blocking' }
+  return { paths: [], fallback: "blocking" };
 }

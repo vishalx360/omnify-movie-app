@@ -4,12 +4,16 @@ import { getList, movieSectionTypes } from "@/utils/GetMovieData";
 import type MovieDB from "node-themoviedb";
 
 function Dashboard({
-  nowPlaying, upcoming, popular, topRated }: {
-    nowPlaying: MovieDB.Responses.Movie.GetDetails[],
-    upcoming: MovieDB.Responses.Movie.GetDetails[],
-    popular: MovieDB.Responses.Movie.GetDetails[],
-    topRated: MovieDB.Responses.Movie.GetDetails[]
-  }) {
+  nowPlaying,
+  upcoming,
+  popular,
+  topRated,
+}: {
+  nowPlaying: MovieDB.Responses.Movie.GetDetails[];
+  upcoming: MovieDB.Responses.Movie.GetDetails[];
+  popular: MovieDB.Responses.Movie.GetDetails[];
+  topRated: MovieDB.Responses.Movie.GetDetails[];
+}) {
   return (
     <DashboardLayout>
       <section className=" container py-10">
@@ -24,7 +28,6 @@ function Dashboard({
 
 export default Dashboard;
 
-
 export async function getStaticProps() {
   const promises = movieSectionTypes.map((type) => getList({ type, page: 1 }));
   const [nowPlaying, upcoming, popular, topRated] = await Promise.all(promises);
@@ -36,5 +39,5 @@ export async function getStaticProps() {
       topRated,
     },
     revalidate: 60 * 60 * 6, // 6 hours
-  }
+  };
 }

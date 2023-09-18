@@ -3,11 +3,7 @@ import { Heart, Trash } from "lucide-react";
 import type MovieDB from "node-themoviedb";
 import { Button } from "./ui/button";
 
-function AddToFavBtn({
-  movie,
-}: {
-  movie: MovieDB.Responses.Movie.GetDetails;
-}) {
+function AddToFavBtn({ movie }: { movie: MovieDB.Responses.Movie.GetDetails }) {
   const utils = api.useContext();
   const {
     data: exist,
@@ -21,7 +17,7 @@ function AddToFavBtn({
       utils.favorite.get.setData(undefined, (prev) => {
         if (!prev) return prev;
         return [...prev, movie];
-      })
+      });
     },
     onSuccess: async () => {
       await utils.favorite.get.refetch();
@@ -33,7 +29,7 @@ function AddToFavBtn({
       utils.favorite.get.setData(undefined, (prev) => {
         if (!prev) return prev;
         return [...prev].filter((m) => m.id !== movie.id);
-      })
+      });
     },
     onSuccess: async () => {
       await utils.favorite.get.refetch();
@@ -68,8 +64,8 @@ function AddToFavBtn({
         {isLoading
           ? "Loading.."
           : exist
-            ? "Remove from favorite"
-            : "Add to favorite"}
+          ? "Remove from favorite"
+          : "Add to favorite"}
       </Button>
     </>
   );
@@ -77,14 +73,10 @@ function AddToFavBtn({
 
 export default AddToFavBtn;
 
-
-
-
 export function AddToFavBtnSkeleton() {
   return (
-    <div className="w-32 h-12 animate-pulse bg-gray-400 rounded-md flex items-center justify-center">
+    <div className="flex h-12 w-32 animate-pulse items-center justify-center rounded-md bg-gray-400">
       Loading...
     </div>
   );
 }
-

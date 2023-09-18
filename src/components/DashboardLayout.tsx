@@ -1,10 +1,10 @@
 import { cn } from "@/lib/utils";
+import { ExternalLinkIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { SearchInput } from "./SearchInput";
 import { UserMenu } from "./UserMenu";
-import { ExternalLinkIcon } from "lucide-react";
 
 function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (

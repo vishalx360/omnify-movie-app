@@ -9,11 +9,8 @@ function MovieDetail({
   children?: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col md:gap-10 items-center justify-center md:flex-row md:justify-start">
-      <motion.div
-        className="w-[250px]"
-        layoutId={`image:${movie.id}`}
-      >
+    <div className="flex flex-col items-center justify-center md:flex-row md:justify-start md:gap-10">
+      <motion.div className="w-[250px]" layoutId={`image:${movie.id}`}>
         <Image
           unoptimized
           placeholder="blur"
@@ -22,12 +19,11 @@ function MovieDetail({
           width={200}
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           alt={`${movie.title} Poster`}
-          className="w-full h-full rounded-lg object-cover"
+          className="h-full w-full rounded-lg object-cover"
         />
       </motion.div>
       <div className="max-w-[700px]  p-6">
-        <h2
-          className="mb-2 text-2xl font-semibold md:text-4xl">
+        <h2 className="mb-2 text-2xl font-semibold md:text-4xl">
           {movie.title}
         </h2>
         <div className="text-md flex items-center gap-5">
@@ -45,22 +41,18 @@ function MovieDetail({
 
 export default MovieDetail;
 
-
 export function MovieDetailSkeleton() {
   return (
-    <div className="flex flex-col md:gap-10 items-center justify-center md:flex-row md:justify-start">
-      <div className="w-[250px] h-[300px] animate-pulse bg-gray-400 rounded-lg" />
+    <div className="flex flex-col items-center justify-center md:flex-row md:justify-start md:gap-10">
+      <div className="h-[300px] w-[250px] animate-pulse rounded-lg bg-gray-400" />
       <div className="max-w-[700px] p-6">
-        <div className="mb-2 text-2xl rounded-xl h-10 font-semibold md:text-4xl bg-gray-400 animate-pulse">
+        <div className="mb-2 h-10 animate-pulse rounded-xl bg-gray-400 text-2xl font-semibold md:text-4xl"></div>
+        <div className="text-md mt-5 flex items-center gap-5">
+          <div className="h-5 w-52 animate-pulse rounded-xl bg-gray-400 text-gray-600"></div>
+          <div className="h-5 w-52 animate-pulse rounded-xl bg-gray-400 text-gray-600"></div>
         </div>
-        <div className="text-md flex mt-5 items-center gap-5">
-          <div className="rounded-xl h-5 w-52 text-gray-600 bg-gray-400 animate-pulse"></div>
-          <div className="rounded-xl h-5 w-52 text-gray-600 bg-gray-400 animate-pulse"></div>
-        </div>
-        <div className="rounded-xl mb-4 h-5 mt-5 leading-8 text-gray-700 bg-gray-400 animate-pulse">
-        </div>
-        <div className="rounded-xl  mb-4 h-5 mt-5 leading-8 text-gray-700 bg-gray-400 animate-pulse">
-        </div>
+        <div className="mb-4 mt-5 h-5 animate-pulse rounded-xl bg-gray-400 leading-8 text-gray-700"></div>
+        <div className="mb-4  mt-5 h-5 animate-pulse rounded-xl bg-gray-400 leading-8 text-gray-700"></div>
       </div>
     </div>
   );

@@ -17,8 +17,8 @@ Want to setup locally ? follow [Setup Instructions](/Setup-Instruction.md)
 
 ## Final Ui Screenshots
 
-|           Dashboard           |     Movie Detail Page     |        Favorite Page        |
-| :---------------------------: | :-----------------------: | :-------------------------: |
+|                   Dashboard                   |             Movie Detail Page             |                Favorite Page                |
+| :-------------------------------------------: | :---------------------------------------: | :-----------------------------------------: |
 | ![dashboard](./public/diagrams/dashboard.png) | ![details](./public/diagrams/details.png) | ![favorite](./public/diagrams/favorite.png) |
 
 ## Tech Stack

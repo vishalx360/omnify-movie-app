@@ -1,4 +1,4 @@
-import MovieDB from "node-themoviedb";
+import type MovieDB from "node-themoviedb";
 import MovieGrid from "./MovieGrid";
 
 type LIST_TYPES = "POPULAR" | "TOPRATED" | "NOWPLAYING" | "UPCOMING";
@@ -10,7 +10,13 @@ const LIST_NAMES = {
   UPCOMING: "Upcoming",
 };
 
-function DiscoverGrid({ type, movies }: { type: LIST_TYPES, movies: MovieDB.Responses.Movie.GetDetails[] }) {
+function DiscoverGrid({
+  type,
+  movies,
+}: {
+  type: LIST_TYPES;
+  movies: MovieDB.Responses.Movie.GetDetails[];
+}) {
   return <MovieGrid movies={movies} title={LIST_NAMES[type]} />;
 }
 
