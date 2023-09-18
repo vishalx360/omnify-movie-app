@@ -15,7 +15,7 @@ jobs:
       GITHUB_CLIENT_ID: 'https://test_value.com'
       GITHUB_CLIENT_SECRET: 'https://test_value.com'
       TMDB_API_KEY: 'https://test_value.com'
-      REDIS_URL: ${{ vars.REDIS_URL }} 
+      REDIS_URL: ${{ secrets.REDIS_URL }} 
       NEXTAUTH_URL: 'https://test_value.com'
      
     steps:
