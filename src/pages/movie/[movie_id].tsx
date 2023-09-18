@@ -1,28 +1,19 @@
 import AddToFavBtn from "@/components/AddToFavBtn";
 import BackButton from "@/components/BackButton";
 import DashboardLayout from "@/components/DashboardLayout";
-import MovieDetail, { MovieDetailSkeleton } from "@/components/MovieDetail";
-import { MovieRowSkeleton } from "@/components/MovieGrid";
-import SimilarMovies, { SimilarMoviesSkeleton } from "@/components/SimilarMovieRow";
-import { api } from "@/utils/api";
-import { LucideLoader } from "lucide-react";
+import MovieDetail from "@/components/MovieDetail";
+import SimilarMovies from "@/components/SimilarMovieRow";
+import { getList, getMovieDetails, getSimilar, movieSectionTypes } from "@/utils/GetMovieData";
+import { GetStaticPropsContext } from "next";
 import Error from "next/error";
-import { useRouter } from "next/router";
+import MovieDB from "node-themoviedb";
 
-function MovieDetailsPage() {
-  const router = useRouter();
-  const { data: movie, isLoading, error } = api.movie.getDetails.useQuery(
-    {
-      movie_id: router.query?.movie_id as string,
-    },
-    {
-      enabled: Boolean(router.query.movie_id),
-    }
-  );
+function MovieDetailsPage({ movie, similarMovies }:
+  { movie: MovieDB.Responses.Movie.GetDetails | null, similarMovies: MovieDB.Responses.Movie.GetDetails[] | null }) {
 
-  if (error) {
+  if (!movie) {
     return (
-      <Error statusCode={error.data?.httpStatus ?? 500} title={error.message} />
+      <Error statusCode={500} title={"Some error occured getting details.."} />
     );
   }
   return (
@@ -31,34 +22,64 @@ function MovieDetailsPage() {
         <div className="mb-5">
           <BackButton />
         </div>
-        {isLoading ? (
+
+        {movie && (
           <>
-            <MovieDetailSkeleton />
-            <div className="mt-10">
-              <MovieRowSkeleton amount={10} />
-            </div>
+            <MovieDetail movie={movie}>
+              <div className="mt-10 flex items-center ">
+                <AddToFavBtn movie={movie} />
+              </div>
+            </MovieDetail>
+            {similarMovies && <div className="mt-10">
+              <SimilarMovies movies={similarMovies} />
+            </div>}
           </>
-        )
-          : (
-            <>
-              {movie && (
-                <>
-                  <MovieDetail movie={movie}>
-                    <div className="mt-10 flex items-center ">
-                      <AddToFavBtn movie={movie} />
-                    </div>
-                  </MovieDetail>
-                  <div className="mt-10">
-                    <SimilarMovies movie_id={String(movie.id)} />
-                  </div>
-                </>
-              )}
-            </>
-          )
-        }
+        )}
+
       </section>
     </DashboardLayout>
   );
 }
 
 export default MovieDetailsPage;
+
+
+
+export async function getStaticProps(context: GetStaticPropsContext) {
+  try {
+    const movie = await getMovieDetails(context.params?.movie_id as string);
+    const similarMovies = await getSimilar({ movie_id: context.params?.movie_id as string, page: 1 });
+    return {
+      props: { movie, similarMovies },
+      revalidate: 60 * 60 * 24 * 30, // 30 days
+    }
+  }
+  catch (e) {
+    return {
+      props: { movie: null, similarMovies: null },
+      revalidate: 60 * 60 * 6, // 6 hours
+    }
+  }
+}
+
+
+export async function getStaticPaths() {
+  const promises = movieSectionTypes.map((type) => getList({ type, page: 1 }));
+  const [nowPlaying, upcoming, popular, topRated] = await Promise.all(promises);
+
+  const movieIdSet = new Set<number>();
+
+  const allMovies = [];
+  if (nowPlaying) allMovies.push(...nowPlaying);
+  if (upcoming) allMovies.push(...upcoming);
+  if (popular) allMovies.push(...popular);
+  if (topRated) allMovies.push(...topRated);
+
+  allMovies.forEach((movie) => {
+    movieIdSet.add(movie.id);
+  });
+  const paths = [...movieIdSet].map((id) => ({
+    params: { movie_id: String(id) },
+  }));
+  return { paths, fallback: 'blocking' }
+}

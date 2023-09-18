@@ -6,7 +6,7 @@ import type MovieDB from "node-themoviedb";
 function MoviePreview({
   movie,
 }: {
-  movie: MovieDB.Objects.Movie | MovieDB.Responses.Movie.GetDetails;
+  movie: MovieDB.Responses.Movie.GetDetails | MovieDB.Responses.Movie.GetDetails;
 }) {
   return (
     <Link

@@ -6,7 +6,7 @@ function MovieGrid({
   title,
 }: {
   title: string;
-  movies: MovieDB.Objects.Movie[] | MovieDB.Responses.Movie.GetDetails[];
+  movies: MovieDB.Responses.Movie.GetDetails[];
 }) {
   return (
     <div className="mb-8">
@@ -14,7 +14,7 @@ function MovieGrid({
       {movies?.length > 0 ? (
         <div className="flex flex-wrap items-center gap-5">
           {movies?.slice(0, 18)?.map((movie, index) => (
-            <MoviePreview key={index} movie={movie} />
+            <MoviePreview key={movie.id} movie={movie} />
           ))}
         </div>
       ) : (

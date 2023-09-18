@@ -1,9 +1,8 @@
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
+import { getMovieDetails } from "@/utils/GetMovieData";
 import { AddToFavoriteSchema } from "@/utils/ValidationSchema";
 import { TRPCError } from "@trpc/server";
-import type MovieDB from "node-themoviedb";
 import { z } from "zod";
-import { GetMovieDetails } from "./movie";
 
 export const FavoriteRouter = createTRPCRouter({
   get: protectedProcedure.query(async ({ ctx }) => {
@@ -19,12 +18,10 @@ export const FavoriteRouter = createTRPCRouter({
       },
     });
     const movieDetailsPromises = favorites.map(
-      async (fav) => await GetMovieDetails(fav.movie_id)
+      async (fav) => await getMovieDetails(fav.movie_id)
     );
     const movieDetails = await Promise.all(movieDetailsPromises);
-    return movieDetails as
-      | MovieDB.Objects.Movie[]
-      | MovieDB.Responses.Movie.GetDetails[];
+    return movieDetails;
   }),
   doesExist: protectedProcedure
     .input(

@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 function AddToFavBtn({
   movie,
 }: {
-  movie: MovieDB.Objects.Movie | MovieDB.Responses.Movie.GetDetails;
+  movie: MovieDB.Responses.Movie.GetDetails;
 }) {
   const utils = api.useContext();
   const {
@@ -16,13 +16,27 @@ function AddToFavBtn({
   } = api.favorite.doesExist.useQuery({ movie_id: movie.id });
 
   const AddMutation = api.favorite.add.useMutation({
-    onSuccess: () => {
+    onMutate() {
       utils.favorite.doesExist.setData({ movie_id: movie.id }, true);
+      utils.favorite.get.setData(undefined, (prev) => {
+        if (!prev) return prev;
+        return [...prev, movie];
+      })
+    },
+    onSuccess: async () => {
+      await utils.favorite.get.refetch();
     },
   });
   const RemoveMutation = api.favorite.remove.useMutation({
-    onSuccess: () => {
+    onMutate() {
       utils.favorite.doesExist.setData({ movie_id: movie.id }, false);
+      utils.favorite.get.setData(undefined, (prev) => {
+        if (!prev) return prev;
+        return [...prev].filter((m) => m.id !== movie.id);
+      })
+    },
+    onSuccess: async () => {
+      await utils.favorite.get.refetch();
     },
   });
   const handleToggel = () => {

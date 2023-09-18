@@ -1,7 +1,6 @@
 import { createTRPCRouter } from "@/server/api/trpc";
 import { AuthenticationRouter } from "./routers/authentication";
 import { FavoriteRouter } from "./routers/favorite";
-import { MovieRouter } from "./routers/movie";
 
 /**
  * This is the primary router for your server.
@@ -10,7 +9,6 @@ import { MovieRouter } from "./routers/movie";
  */
 export const appRouter = createTRPCRouter({
   authentication: AuthenticationRouter,
-  movie: MovieRouter,
   favorite: FavoriteRouter,
 });
 

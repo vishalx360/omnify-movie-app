@@ -5,7 +5,7 @@ function MovieDetail({
   movie,
   children,
 }: {
-  movie: MovieDB.Objects.Movie | MovieDB.Responses.Movie.GetDetails;
+  movie: MovieDB.Responses.Movie.GetDetails;
   children?: React.ReactNode;
 }) {
   return (

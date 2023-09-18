@@ -1,16 +1,22 @@
 import DashboardLayout from "@/components/DashboardLayout";
 import DiscoverGrid from "@/components/DiscoverGrid";
-import { type GetServerSidePropsContext } from "next";
-import { getSession } from "next-auth/react";
+import { getList, movieSectionTypes } from "@/utils/GetMovieData";
+import type MovieDB from "node-themoviedb";
 
-function Dashboard() {
+function Dashboard({
+  nowPlaying, upcoming, popular, topRated }: {
+    nowPlaying: MovieDB.Responses.Movie.GetDetails[],
+    upcoming: MovieDB.Responses.Movie.GetDetails[],
+    popular: MovieDB.Responses.Movie.GetDetails[],
+    topRated: MovieDB.Responses.Movie.GetDetails[]
+  }) {
   return (
     <DashboardLayout>
       <section className=" container py-10">
-        <DiscoverGrid type="NOWPLAYING" />
-        <DiscoverGrid type="UPCOMING" />
-        <DiscoverGrid type="POPULAR" />
-        <DiscoverGrid type="TOPRATED" />
+        <DiscoverGrid movies={nowPlaying} type="NOWPLAYING" />
+        <DiscoverGrid movies={upcoming} type="UPCOMING" />
+        <DiscoverGrid movies={popular} type="POPULAR" />
+        <DiscoverGrid movies={topRated} type="TOPRATED" />
       </section>
     </DashboardLayout>
   );
@@ -18,18 +24,17 @@ function Dashboard() {
 
 export default Dashboard;
 
-// make server call to redirect to /signin if not authenticated nextauth
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getSession(context);
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/signin",
-        permanent: false,
-      },
-    };
-  }
+
+export async function getStaticProps() {
+  const promises = movieSectionTypes.map((type) => getList({ type, page: 1 }));
+  const [nowPlaying, upcoming, popular, topRated] = await Promise.all(promises);
   return {
-    props: { session },
-  };
+    props: {
+      nowPlaying,
+      upcoming,
+      popular,
+      topRated,
+    },
+    revalidate: 60 * 60 * 6, // 6 hours
+  }
 }
