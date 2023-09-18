@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import Image from "next/image";
 import type MovieDB from "node-themoviedb";
+import ImageWithFallback from "./ImageWithFallback";
 function MovieDetail({
   movie,
   children,
@@ -11,7 +11,7 @@ function MovieDetail({
   return (
     <div className="flex flex-col items-center justify-center md:flex-row md:justify-start md:gap-10">
       <motion.div className="w-[250px]" layoutId={`image:${movie.id}`}>
-        <Image
+        <ImageWithFallback
           unoptimized
           placeholder="blur"
           blurDataURL="/placeholder.png"
