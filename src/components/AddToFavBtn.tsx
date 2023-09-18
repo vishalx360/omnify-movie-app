@@ -54,11 +54,23 @@ function AddToFavBtn({
         {isLoading
           ? "Loading.."
           : exist
-          ? "Remove from favorite"
-          : "Add to favorite"}
+            ? "Remove from favorite"
+            : "Add to favorite"}
       </Button>
     </>
   );
 }
 
 export default AddToFavBtn;
+
+
+
+
+export function AddToFavBtnSkeleton() {
+  return (
+    <div className="w-32 h-12 animate-pulse bg-gray-400 rounded-md flex items-center justify-center">
+      Loading...
+    </div>
+  );
+}
+
